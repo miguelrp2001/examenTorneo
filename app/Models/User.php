@@ -43,6 +43,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function torneosCreados()
+    {
+        return $this->hasMany(Torneo::class, 'creador_id');
+    }
+
     public function torneos()
     {
         return $this->belongsToMany(Torneo::class)->withTimestamps();

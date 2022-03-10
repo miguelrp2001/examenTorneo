@@ -42,10 +42,10 @@
                         @if (Auth::user()->rol == 'jugador')
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Inscribir torneo</a>
+                                    <a class="nav-link" href="{{ route('insctorneo') }}">Inscribir torneo</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Mis torneos</a>
+                                    <a class="nav-link" href="{{ route('torneosjugador') }}">Mis torneos</a>
                                 </li>
                             </ul>
                         @endif
@@ -53,10 +53,10 @@
                         @if (Auth::user()->rol == 'creador')
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Crear torneo</a>
+                                    <a class="nav-link" href="{{ route('creartorneo') }}">Crear torneo</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Torneos creados</a>
+                                    <a class="nav-link" href="{{ route('torneoscreador') }}">Torneos creados</a>
                                 </li>
                             </ul>
                         @endif
@@ -64,7 +64,8 @@
                         @if (Auth::user()->rol == 'admin')
                             <ul class="navbar-nav">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="#">Panel de control</a>
+                                    <a class="nav-link" href="{{ route('torneosadministrador') }}">Panel de
+                                        control</a>
                                 </li>
                             </ul>
                         @endif
@@ -94,11 +95,9 @@
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                                                                                                                 document.getElementById('logout-form').submit();">
+                                        onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
-
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST"
                                         class="d-none">
                                         @csrf
@@ -112,6 +111,22 @@
         </nav>
 
         <main class="py-4">
+            @if (session('exito'))
+                <div class="container">
+                    <div class="alert alert-success">
+                        {{ session('exito') }}
+                    </div>
+                </div>
+            @endif
+
+            @if (session('error'))
+                <div class="container">
+                    <div class="alert alert-danger">
+                        {{ session('error') }}
+                    </div>
+                </div>
+            @endif
+
             @yield('content')
         </main>
     </div>

@@ -17,7 +17,12 @@ class Torneo extends Model
 
     public function nivel()
     {
-        return $this->belongsTo(Nivel_torneo::class);
+        return $this->belongsTo(NivelTorneo::class);
+    }
+
+    public function creador()
+    {
+        return $this->belongsTo(User::class, 'creador_id');
     }
 
     public function users()
