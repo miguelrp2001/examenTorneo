@@ -42,4 +42,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function torneos()
+    {
+        return $this->belongsToMany(Torneo::class)->withTimestamps();
+    }
 }

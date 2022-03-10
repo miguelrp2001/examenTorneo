@@ -19,8 +19,10 @@ return new class extends Migration
             $table->date('fecha');
             $table->bigInteger('nivel_id')->unsigned();
             $table->bigInteger('creador_id')->unsigned();
+            $table->foreign('creador_id')->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('nivel_id')->references('id')->on('nivel_torneos')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
-            
+
             // Faltan las relaciones
         });
     }

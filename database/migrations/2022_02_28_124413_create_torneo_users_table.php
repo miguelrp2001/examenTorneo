@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Torneo;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,8 +17,8 @@ return new class extends Migration
     {
         Schema::create('torneo_user', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('torneo_id')->unsigned();
-            $table->bigInteger('user_id')->unsigned();
+            $table->foreignIdFor(Torneo::class)->references('id')->on('torneos')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignIdFor(User::class)->references('id')->on('users')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
 
             // Faltan las relaciones
